@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A Jornada de Alice</title>
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Georgia', serif;
+}
+
+body {
+  background: radial-gradient(circle at top, #2b2b2b, #0d0d0d);
+  color: #f5e6a8;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.screen {
+  display: none;
+  height: 100vh;
+  padding: 24px;
+  text-align: center;
+}
+
+.screen.active {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+h1 {
+  font-size: 1.6rem;
+  margin-bottom: 16px;
+  color: #f2c94c;
+}
+
+p {
+  font-size: 1rem;
+  line-height: 1.6;
+  opacity: 0.9;
+}
+
+button {
+  margin-top: 24px;
+  padding: 14px;
+  background: none;
+  border: 1px solid #f2c94c;
+  color: #f2c94c;
+  font-size: 1rem;
+  border-radius: 6px;
+}
+
+button:active {
+  background: #f2c94c;
+  color: #0d0d0d;
+}
+
+.lily {
+  position: absolute;
+  opacity: 0.08;
+  font-size: 4rem;
+}
+
+.lily.one { top: 10%; left: 10%; }
+.lily.two { bottom: 15%; right: 10%; }
+
+.fade {
+  animation: fade 2s ease;
+}
+
+@keyframes fade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+</style>
+</head>
+
+<body>
+
+<div class="lily one">⚜️</div>
+<div class="lily two">⚜️</div>
+
+<!-- INTRO -->
+<div class="screen active fade" id="intro">
+  <h1>Nem toda jornada nasce da luz</h1>
+  <p>
+    Algumas começam no silêncio.<br><br>
+    Esta é a jornada de <strong>ALICE</strong>.<br>
+    Se quiser seguir, caminhe com intenção.
+  </p>
+  <button onclick="go('fase1')">Entrar no caminho</button>
+</div>
+
+<!-- FASE 1 -->
+<div class="screen fade" id="fase1">
+  <h1>Vale do Silêncio</h1>
+  <p>
+    O mundo não responde.<br>
+    <strong>ALICE</strong> escolhe permanecer ou virar as costas.
+  </p>
+  <button onclick="gainKey(1)">Permanecer</button>
+</div>
+
+<!-- FASE 2 -->
+<div class="screen fade" id="fase2">
+  <h1>Jardim da Permanência</h1>
+  <p>
+    Entre pedra e flor,<br>
+    algo cresce apenas se for cuidado.
+  </p>
+  <button onclick="gainKey(2)">Cuidar</button>
+</div>
+
+<!-- FASE 3 -->
+<div class="screen fade" id="fase3">
+  <h1>Portal da Partida</h1>
+  <p>
+    Toda despedida carrega intenção.<br>
+    <strong>ALICE</strong>, você avança mesmo assim?
+  </p>
+  <button onclick="gainKey(3)">Avançar</button>
+</div>
+
+<!-- BAÚ FINAL -->
+<div class="screen fade" id="final">
+  <h1>O Baú Selado</h1>
+  <p id="finalText">
+    As chaves se encaixam.<br><br>
+    <strong>ALICE</strong>,<br><br>
+    Antes de você ir pra São Paulo,<br>
+    eu queria dividir mais um instante fora do tempo.<br><br>
+    Um piquenique.<br>
+    Tintas.<br>
+    Silêncio.<br>
+    Presença.<br><br>
+    Você aceita caminhar comigo mais uma vez?
+  </p>
+  <button onclick="accept()">Aceitar</button>
+</div>
+
+<script>
+let keys = 0;
+
+function go(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+}
+
+function gainKey(n) {
+  keys++;
+  if (n === 1) go('fase2');
+  if (n === 2) go('fase3');
+  if (n === 3) go('final');
+}
+
+function accept() {
+  document.getElementById('finalText').innerHTML =
+    "Então está decidido.<br><br>Eu te espero.";
+}
+</script>
+
+</body>
+</html>
